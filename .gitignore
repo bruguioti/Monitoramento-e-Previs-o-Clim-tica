@@ -5,3 +5,4 @@ venv/
 # Arquivos de ambiente/segredo (NUNCA envie para o Git)
 .env
 *.log
+.gitignore
