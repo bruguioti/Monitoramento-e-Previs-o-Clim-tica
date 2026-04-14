@@ -48,7 +48,7 @@ try:
         st.stop()
 
     # 2. Barra Lateral - Filtros e IA
-    st.sidebar.header("📅 Configurações")
+    st.sidebar.header("Configurações")
     
     data_min = df['timestamp'].min().date()
     data_max = df['timestamp'].max().date()
@@ -61,7 +61,7 @@ try:
     )
 
     st.sidebar.markdown("---")
-    st.sidebar.header("🤖 Inteligência Artificial")
+    st.sidebar.header("Inteligência Artificial")
     btn_previsao = st.sidebar.button("Prever Próxima Hora")
 
     # 3. Processamento de Filtros (Proteção contra NaTType)
