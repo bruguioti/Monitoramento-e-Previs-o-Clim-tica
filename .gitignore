@@ -1,3 +1,4 @@
+# Ambientes Virtuais
 .venv/
 env/
 venv/
@@ -5,6 +6,15 @@ venv/
 # Arquivos de ambiente/segredo (NUNCA envie para o Git)
 .env
 *.log
+
+# Controle do próprio Git
 .gitignore
+
+# Arquivos de Dados e Planilhas
 dados_estacao_limpos.csv
 dados.xlsx
+
+# IDEs e Sistema
+.vscode/
+.idea/
+.DS_Store
