@@ -5,7 +5,7 @@ import joblib
 import os
 
 # 1. Configuração da Página
-st.set_page_config(page_title="Defesa Civil - IFMT Campo Verde", layout="wide", page_icon="🛡️")
+st.set_page_config(page_title="IFMT Campo Verde", layout="wide", page_icon="")
 
 st.title(" Monitoramento e Previsão Climática")
 st.markdown("---")
