@@ -6,3 +6,5 @@ venv/
 .env
 *.log
 .gitignore
+dados_estacao_limpos.csv
+dados.xlsx
