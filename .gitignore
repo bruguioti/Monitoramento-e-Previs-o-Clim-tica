@@ -18,3 +18,4 @@ dados.xlsx
 .vscode/
 .idea/
 .DS_Store
+*.pkl
