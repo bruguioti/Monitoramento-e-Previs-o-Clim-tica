@@ -41,11 +41,11 @@ def treinar_previsao_climatica():
     # 5. Validação
     previsoes = modelo.predict(X_test)
     erro = mean_absolute_error(y_test, previsoes)
-    print(f"✅ Modelo treinado! Erro médio: {erro:.2f}°C")
+    print(f" Modelo treinado! Erro médio: {erro:.2f}°C")
 
     # 6. Salvar o modelo para usar no Dashboard
     joblib.dump(modelo, 'modelo_clima_ifmt.pkl')
-    print("💾 Modelo salvo como 'modelo_clima_ifmt.pkl'")
+    print(" Modelo salvo como 'modelo_clima_ifmt.pkl'")
 
 if __name__ == "__main__":
     treinar_previsao_climatica()
