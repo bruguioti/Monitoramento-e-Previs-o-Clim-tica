@@ -6,19 +6,18 @@ from sklearn.metrics import mean_absolute_error
 import joblib
 
 def treinar_previsao_climatica():
-    # 1. Carregar dados validados
+   
     df = pd.read_csv('dados_estacao_limpos.csv', low_memory=False)
     df = df[~df['Data'].str.contains('Date|Data', na=False)]
     df.columns = [col.replace('\n', ' ').strip() for col in df.columns]
     
-    # Converter para numérico
+   
     df['Temperatura Externa'] = pd.to_numeric(df['Temperatura Externa'], errors='coerce')
     df['Umidade do Ar Externa'] = pd.to_numeric(df['Umidade do Ar Externa'], errors='coerce')
     df['Radiação Solar (Wm2)'] = pd.to_numeric(df['Radiação Solar (Wm2)'], errors='coerce')
     df = df.dropna(subset=['Temperatura Externa'])
 
-    # 2. FEATURE ENGINEERING (O "Cérebro" do Algoritmo)
-    # Criamos colunas que mostram o que aconteceu 1 hora atrás (Lag)
+  
     df['temp_anterior'] = df['Temperatura Externa'].shift(1)
     df['umid_anterior'] = df['Umidade do Ar Externa'].shift(1)
     df['rad_anterior'] = df['Radiação Solar (Wm2)'].shift(1)
@@ -35,7 +34,7 @@ def treinar_previsao_climatica():
     # Treino e Teste (80/20)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # 4. MODELO: Gradient Boosting (Excelente para séries temporais)
+    # 4. MODELO: Gradient Boosting 
     modelo = GradientBoostingRegressor(n_estimators=100, learning_rate=0.1, max_depth=5, random_state=42)
     modelo.fit(X_train, y_train)
 
