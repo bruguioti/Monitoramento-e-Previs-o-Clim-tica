@@ -111,22 +111,65 @@ try:
     else:
         st.info(" Selecione o intervalo de datas no menu lateral.")
 
-    # 5. Inteligência Artificial
+   
+   # 5. Inteligência Artificial
     if btn_previsao:
         if os.path.exists('modelo_clima_ifmt.pkl'):
             modelo = joblib.load('modelo_clima_ifmt.pkl')
-            # Pega os dados mais recentes para a predição
-            atual = df.iloc[-1]
-            anterior = df.iloc[-2]
             
-            X_input = pd.DataFrame([[
-                atual['Temperatura Externa'], atual['Umidade do Ar Externa'],
-                anterior['Temperatura Externa'], anterior['Umidade do Ar Externa'],
-                atual['Radiação Solar (Wm2)']
-            ]], columns=['Temperatura Externa', 'Umidade do Ar Externa', 'temp_anterior', 'umid_anterior', 'rad_anterior'])
+            # Preparação para múltiplas horas
+            previsoes = []
+            ultimo_registro = df.iloc[-1]
+            penultimo_registro = df.iloc[-2]
             
-            pred = modelo.predict(X_input)[0]
-            st.sidebar.success(f" Estimativa Próxima Hora: **{pred:.1f} °C**")
+       
+            t_atual = ultimo_registro['Temperatura Externa']
+            u_atual = ultimo_registro['Umidade do Ar Externa']
+            t_ant = penultimo_registro['Temperatura Externa']
+            u_ant = penultimo_registro['Umidade do Ar Externa']
+            rad = ultimo_registro['Radiação Solar (Wm2)']
+            
+            agora = ultimo_registro['timestamp']
+
+            st.markdown("---")
+            st.subheader(" Previsão para as Próximas 6 Horas")
+
+            for i in range(1, 7):
+             
+                X_input = pd.DataFrame([[
+                    t_atual, u_atual, t_ant, u_ant, rad
+                ]], columns=['Temperatura Externa', 'Umidade do Ar Externa', 'temp_anterior', 'umid_anterior', 'rad_anterior'])
+                
+                # Predição de Temperatura
+                t_prevista = modelo.predict(X_input)[0]
+                
+                # Lógica Simples de Chuva (Exemplo: se umidade > 85% e temp cair, chance de chuva)
+               
+                chance_chuva = "Baixa"
+                if u_atual > 80: chance_chuva = "Moderada"
+                if u_atual > 90: chance_chuva = "Alta"
+
+                horario = agora + pd.Timedelta(hours=i)
+                
+                previsoes.append({
+                    "Horário": horario.strftime('%H:%M'),
+                    "Temp. Prevista (°C)": round(t_prevista, 1),
+                    "Umidade Est. (%)": round(u_atual, 1), # Usando a atual como base
+                    "Prob. Chuva": chance_chuva
+                })
+
+                # Atualiza variáveis para a "próxima" hora da simulação (feedback loop)
+                t_ant = t_atual
+                t_atual = t_prevista
+              
+            # Exibição em Tabela
+            df_previsao = pd.DataFrame(previsoes)
+            
+          
+            st.table(df_previsao)
+            
+            
+            
         else:
             st.sidebar.error("Modelo IA não encontrado. Treine o modelo primeiro.")
 
