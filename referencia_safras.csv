@@ -1,0 +1,12 @@
+Cultura,Mes,Status,Risco_Produtividade,Observacao
+Soja,9,Ideal,Baixo,Início da janela após vazio
+Soja,10,Ideal,Baixo,Melhor janela para Campo Verde
+Soja,11,Atrasado,Médio,Risco de colheita em período muito chuvoso
+Soja,12,Risco Alto,Alto,Perda de ciclo e atraso total da safrinha
+Milho,1,Ideal,Baixo,Janela de ouro para safrinha
+Milho,2,Ideal,Baixo,Fechamento da janela ideal
+Milho,3,Atrasado,Médio,Risco de pegar seca no enchimento de grãos
+Milho,4,Risco Total,Muito Alto,Risco altíssimo de quebra por falta de chuva
+Algodão,12,Ideal,Baixo,Início do plantio
+Algodão,1,Ideal,Baixo,Janela principal
+Algodão,2,Atrasado,Médio,Risco de chuva na abertura do capulho
